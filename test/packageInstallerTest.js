@@ -28,8 +28,9 @@ describe('PackageInstallerTest', function() {
 
     it('should return a valid dependencyTreeObj', function() {
       var dependencyArray = ['KittenService:', 'Leetmeme: Cyberportal', 'Cyberportal: Ice',
-        'CamelCaser: KittenService', 'Fraudstream: Leetmeme', 'Ice: '];
+        'CamelCaser: KittenService', 'Fraudstream: Leetmeme', 'Ice: ',];
       var dependencyTreeObj = PackageInstaller.createDependencyObject(dependencyArray, ':');
+      debug('depObj', dependencyTreeObj);
       expect(dependencyTreeObj.Leetmeme).to.equal('Cyberportal');
     });
   });
@@ -44,6 +45,22 @@ describe('PackageInstallerTest', function() {
 
       expect(testFunc).to.throw('No dependencyObject passed in');
     });
+
+    it('should sort a dependencyObj if one is passed in', function() {
+      var dependencyTreeObj = { KittenService: '',
+        Leetmeme: 'Cyberportal',
+        Cyberportal: 'Ice',
+        CamelCaser: 'KittenService',
+        Fraudstream: 'Leetmeme',
+        Ice: '',
+      };
+
+      var sortedDeps = PackageInstaller.sortDependencies(dependencyTreeObj);
+      debug('SORTED ARRAY', sortedDeps);
+      expect(sortedDeps[0]).to.equal('Cyberportal');
+    });
+
+    //Let's test more complex arrays
   });
 
 });
