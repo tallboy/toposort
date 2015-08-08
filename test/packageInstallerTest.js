@@ -28,9 +28,8 @@ describe('PackageInstallerTest', function() {
 
     it('should return a valid dependencyTreeObj', function() {
       var dependencyArray = ['KittenService:', 'Leetmeme: Cyberportal', 'Cyberportal: Ice',
-        'CamelCaser: KittenService', 'Fraudstream: Leetmeme', 'Ice: ',];
+        'CamelCaser: KittenService', 'Fraudstream: Leetmeme', 'Ice: '];
       var dependencyTreeObj = PackageInstaller.createDependencyObject(dependencyArray, ':');
-      expect(dependencyTreeObj).to.exist;
       expect(dependencyTreeObj.Leetmeme).to.equal('Cyberportal');
     });
   });
@@ -42,6 +41,7 @@ describe('PackageInstallerTest', function() {
       var testFunc = function() {
         PackageInstaller.sortDependencies(dependencyObj);
       };
+
       expect(testFunc).to.throw('No dependencyObject passed in');
     });
   });
