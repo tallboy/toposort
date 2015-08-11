@@ -28,10 +28,33 @@ describe('PackageInstallerTest', function() {
 
     it('should return a valid dependencyTreeObj', function() {
       var dependencyArray = ['KittenService:', 'Leetmeme: Cyberportal', 'Cyberportal: Ice',
-        'CamelCaser: KittenService', 'Fraudstream: Leetmeme', 'Ice: ',];
+        'CamelCaser: KittenService', 'Fraudstream: Leetmeme', 'Ice: '];
       var dependencyTreeObj = PackageInstaller.createDependencyObject(dependencyArray, ':');
-      debug('depObj', dependencyTreeObj);
-      expect(dependencyTreeObj.Leetmeme).to.equal('Cyberportal');
+      expect(dependencyTreeObj[0][0]).to.equal('KittenService');
+    });
+  });
+
+  describe('getKeys tests', function() {
+
+    it('should throw an error if no dependency object is passed', function() {
+      var dependencyObj = null;
+      var testFunc = function() {
+        PackageInstaller.getKeys(dependencyObj);
+      };
+
+      expect(testFunc).to.throw('No dependencyObject passed in');
+    });
+
+    it('should throw an error if no dependency object is passed', function() {
+      var dependencyTreeObj = { KittenService: '',
+        Leetmeme: 'Cyberportal',
+        Cyberportal: 'Ice',
+        CamelCaser: 'KittenService',
+        Fraudstream: 'Leetmeme',
+        Ice: ''
+      };
+      var keys = PackageInstaller.getKeys(dependencyTreeObj);
+      expect(keys.length).to.equal(6);
     });
   });
 
@@ -52,7 +75,7 @@ describe('PackageInstallerTest', function() {
         Cyberportal: 'Ice',
         CamelCaser: 'KittenService',
         Fraudstream: 'Leetmeme',
-        Ice: '',
+        Ice: ''
       };
 
       var sortedDeps = PackageInstaller.sortDependencies(dependencyTreeObj);
@@ -61,6 +84,13 @@ describe('PackageInstallerTest', function() {
     });
 
     //Let's test more complex arrays
+    it('should throw a cycle error if there are cyclical dependencies', function() {
+      var dependencyTreeObj = { 1: '1,2', 2: '2,3', 3: '2,1'};
+      var testFunc = function() {
+        PackageInstaller.sortDependencies(dependencyTreeObj);
+      };
+      expect(testFunc).throw('Cyclical dependency found');
+    });
   });
 
 });
