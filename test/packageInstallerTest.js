@@ -70,27 +70,31 @@ describe('PackageInstallerTest', function() {
     });
 
     it('should sort a dependencyObj if one is passed in', function() {
-      var dependencyTreeObj = { KittenService: '',
-        Leetmeme: 'Cyberportal',
-        Cyberportal: 'Ice',
-        CamelCaser: 'KittenService',
-        Fraudstream: 'Leetmeme',
-        Ice: ''
+      var dependencyTreeObj = { 1: ['KittenService'],
+        2: ['Leetmeme', 'Cyberportal'],
+        3: ['Cyberportal', 'Ice'],
+        4: ['CamelCaser', 'KittenService'],
+        5: ['Fraudstream', 'Leetmeme'],
+        6: ['Ice']
       };
 
       var sortedDeps = PackageInstaller.sortDependencies(dependencyTreeObj);
-      debug('SORTED ARRAY', sortedDeps);
-      expect(sortedDeps[0]).to.equal('Cyberportal');
+      expect(sortedDeps[0]).to.equal('KittenService');
     });
 
-    //Let's test more complex arrays
     it('should throw a cycle error if there are cyclical dependencies', function() {
-      var dependencyTreeObj = { 1: '1,2', 2: '2,3', 3: '2,1'};
+      var dependencyArray = ['KittenService:', 'Leetmeme: Cyberportal',
+            'Cyberportal: Ice', 'CamelCaser: KittenService', 'Fraudstream:',
+            'Ice: Leetmeme'];
+
+      var dependencyTreeObj = PackageInstaller.createDependencyObject(dependencyArray, ':');
       var testFunc = function() {
         PackageInstaller.sortDependencies(dependencyTreeObj);
       };
-      expect(testFunc).throw('Cyclical dependency found');
+
+      expect(testFunc).to.throw('Cyclical dependency found');
     });
+
   });
 
 });
