@@ -1,9 +1,9 @@
 {
-  "name": "pluralsight",
+  "name": "tallboy-toposort",
   "version": "0.0.0",
-  "description": "Pluralsight Code Test",
+  "description": "Toposort NPM",
   "homepage": "http://www.tommy-ryan.com",
-  "repository": "tallboy/pluralsight",
+  "repository": "tallboy/toposort",
   "author": {
     "name": "Tommy Ryan",
     "email": "tommy@thetallboy.com",
@@ -13,10 +13,7 @@
     "lib"
   ],
   "main": "lib/index.js",
-  "keywords": [
-    "pluralsight",
-    "interview"
-  ],
+  "keywords": ["toposort"],
   "devDependencies": {
     "gulp": "^3.6.0",
     "gulp-exclude-gitignore": "^1.0.0",

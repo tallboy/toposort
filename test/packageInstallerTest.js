@@ -1,5 +1,5 @@
 'use strict';
-var debug = require('debug')('PluralsightTest:PackageInstaller:Test:');
+var debug = require('debug')('Toposort:PackageInstaller:Test:');
 var chai = require('chai');
 var assert = require('chai').assert;
 var expect = require('chai').expect;

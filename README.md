@@ -1,5 +1,8 @@
-# Pluralsight Test
+# TopoSort Test
 > Package Depencency Checker
+
+## Background
+Brushing up on my algo chops and trying to find real world applications for them as npms.
 
 ## Requirements
 
@@ -28,7 +31,9 @@ DEBUG=* gulp
 
 - Use 'fs' to import a CSV file via a data directory.
 - Rig up a call stack to process dependencies via index.js
+- Use Privates/Publics & this/self
+- Convert to es6
 
 ## License
-
- © [Tommy Ryan](http://www.tommy-ryan.com)
+MIT
+Created By: [Tommy Ryan](http://www.tommy-ryan.com)
